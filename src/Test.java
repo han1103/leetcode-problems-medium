@@ -1,7 +1,14 @@
 
-public class Test {
+public class Test extends Super{
+	public Test() {
+		System.out.println("Def");
+	}
+	
+	public Test(int i) {
+		//this();
+		System.out.println("ctr");
+	}
 	public static void main(String[] args) {
-		for(String s : "1.1".split("\\."))
-			System.out.println(s);
+		new Test(100);
 	}
 }
