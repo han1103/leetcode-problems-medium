@@ -9,6 +9,6 @@ public class Test extends Super{
 		System.out.println("ctr");
 	}
 	public static void main(String[] args) {
-		new Test(100);
+		System.out.println(Integer.parseInt("010"));
 	}
 }
