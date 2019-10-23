@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 
 public class TreeTraverse {
 
@@ -15,6 +17,8 @@ public class TreeTraverse {
 		new TreeTraverse().postOrder(root);
 		System.out.println("\n---------InOrder----------------");
 		new TreeTraverse().inOrder(root);
+		System.out.println("\n---------BFS----------------");
+		new TreeTraverse().bfs(root);
 	}
 
 	public void preOrder(TreeNode root) {
@@ -42,6 +46,27 @@ public class TreeTraverse {
 	}
 	
 	public void bfs(TreeNode root) {
-		System.
+		if(root==null)
+			return;
+		System.out.print(root.val);
+		
+		List<TreeNode> currLayer = new ArrayList<TreeNode>();
+		if(root.left!=null)
+			currLayer.add(root.left);
+		if(root.right!=null)
+			currLayer.add(root.right);
+		
+		while(!currLayer.isEmpty()) {
+			List<TreeNode> nextLayer = new ArrayList<TreeNode>();
+			for(TreeNode node : currLayer) {
+				System.out.print("->"+node.val);
+				if(node.left!=null)
+					nextLayer.add(node.left);
+				if(node.right!=null)
+					nextLayer.add(node.right);
+			}
+			currLayer = nextLayer;
+		}
 	}
+	
 }

@@ -1,7 +1,8 @@
 
-public class Test extends Super{
-	public Test() {
-		System.out.println("Def");
+public class Test {
+	
+	public class Haha{
+		
 	}
 	
 	public Test(int i) {
@@ -9,6 +10,7 @@ public class Test extends Super{
 		System.out.println("ctr");
 	}
 	public static void main(String[] args) {
-		System.out.println(Integer.parseInt("010"));
+		Haha h = new Test(100).new Haha();
+		
 	}
 }
