@@ -1,4 +1,4 @@
 
 public interface InterTest {
-	void testTest();
+	private void testTest() {};
 }
