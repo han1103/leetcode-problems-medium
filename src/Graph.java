@@ -7,7 +7,7 @@ public class Graph {
 	Graph(int n) {
 		adjList = new LinkedList[n];
 		for(int i=0; i<n; i++)
-			adjList[0] = new LinkedList<Integer>();
+			adjList[i] = new LinkedList<Integer>();
 	}
 	
 	void addEdge(int a, int b) {
