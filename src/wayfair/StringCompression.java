@@ -1,3 +1,6 @@
+/*
+ * https://leetcode.com/problems/string-compression/
+*/
 package wayfair;
 
 public class StringCompression {
@@ -5,14 +8,19 @@ public class StringCompression {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		//char[] chars = new char[] {'a','a','b','b','b', 'b', 'b', 'a', 'c','c','c'};
-		char[] chars = new char[] {'b', 'b', 'a', 'a', 'a', 'c', 'c', 'a'};
-		//char[] chars = new char[] {'b', 'b'};
+		//char[] chars = new char[] {'b', 'b', 'a', 'a', 'a', 'c', 'c', 'a'};
+		char[] chars = new char[] {'b', 'b'};
 		new StringCompression().compress(chars);
 		System.out.println(chars);
 		
-		chars = new char[] {'b', 'b', 'a', 'a', 'a', 'c', 'c', 'a'};
+		chars = new char[] {'b', 'b'};
 		new StringCompression().compressFast(chars);
 		System.out.println(chars);
+
+		chars = new char[] {'b', 'b'};
+		new StringCompression().compressLeet(chars);
+		System.out.println(chars);
+		
 	}
 	
 	private final char SPECIAL = '0';
@@ -66,7 +74,7 @@ public class StringCompression {
 		
 		return chars.length - shrink(chars);
     }
-
+	
 	public int compressFast(char[] chars) {
 		if(chars==null)
 			return 0;
@@ -83,7 +91,7 @@ public class StringCompression {
         	else {
         		charInCheck = chars[i];    			
         		if(repeat > 1) {
-        			String repeatStr = new Integer(repeat).toString();
+        			String repeatStr = String.valueOf(repeat);
         			chars[startIndex-shift] = chars[i-1];
         			for(int j=0; j<repeatStr.length(); j++)
         				chars[startIndex+1+j-shift] = repeatStr.charAt(j);
@@ -98,7 +106,7 @@ public class StringCompression {
         	}
         }
 		if(repeat > 1) {
-			String repeatStr = new Integer(repeat).toString();
+			String repeatStr = String.valueOf(repeat);
 			chars[startIndex-shift] = chars[chars.length-1];
 			for(int j=0; j<repeatStr.length(); j++)
 				chars[startIndex+1+j-shift] = repeatStr.charAt(j);
@@ -114,6 +122,53 @@ public class StringCompression {
 		
 		return chars.length - shift;
     }
+
+	public int compressLeet(char[] chars) {
+		if(chars==null)
+			return 0;
+		if(chars.length<=1)
+			return chars.length; 
+		int startIndex = 0;
+		int repeat = 1;
+		int writeIndex = 0;
+		
+        for(int i=1; i<chars.length; i++) {
+        	if(chars[startIndex] == chars[i]) {
+        		repeat++;
+        	}
+        	else {
+    			chars[writeIndex] = chars[i-1];
+    			writeIndex++;
+
+        		if(repeat>1) {
+        			String repeatStr = String.valueOf(repeat);
+        			for(int j=0; j<repeatStr.length(); j++) {
+        				chars[writeIndex] = repeatStr.charAt(j);
+        				writeIndex++;
+        			}
+        		}
+        		startIndex = i;
+        		repeat = 1;
+        	}        
+        }
+        
+		chars[writeIndex] = chars[chars.length-1];
+		writeIndex++;
+        if(repeat>1) {
+			String repeatStr = String.valueOf(repeat);
+			for(int j=0; j<repeatStr.length(); j++) {
+				chars[writeIndex] = repeatStr.charAt(j);
+				writeIndex++;
+			}
+		}
+        
+        int retVal = writeIndex;
+        		
+        for(int i=writeIndex; i<chars.length; i++)
+        	chars[i] = ' ';
+        	        
+        return retVal;
+	}
 	
 }
 
