@@ -27,7 +27,7 @@ public class MajorityElementII {
         		vote2++;
         	}
         	else if(vote1 == 0) {
-                vote1++; 
+                vote1++;
                 maj1 = n; 
             } else if(vote2 == 0) {
             	vote2++;
